@@ -4,7 +4,7 @@ import com.github.ecolban.functiondecorators.utils.parseTree
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.max
 
-private val tree = parseTree("Tree_200.txt")
+private val tree = parseTree("Tree_100.txt")
 
 private fun maxPath(row: Int, col: Int): Int {
     val memo = ConcurrentHashMap<Pair<Int, Int>, Int>()
@@ -23,4 +23,5 @@ private fun maxPath(row: Int, col: Int): Int {
 
 fun main() {
     println(::maxPath.timeIt()(0, 0))
+//    println(TimeIt2(::maxPath)(0, 0))
 }

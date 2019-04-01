@@ -7,8 +7,8 @@ internal class MakeNumberTreeKtTest {
 
     @Test
     fun testParseTree() {
-        val actual = parseTree("Tree_200.txt")
-        assertEquals(200, actual.size)
+        val actual = parseTree("Tree_100.txt")
+        assertEquals(100, actual.size)
         for (row in 0 until actual.size) {
             assertEquals(row + 1, actual[row].size)
         }
