@@ -2,13 +2,6 @@ package com.github.ecolban.functiondecorators
 
 import java.util.concurrent.ConcurrentHashMap
 
-class MemoizeWrong<U : Any, V : Any>(val f: (U) -> V) : (U) -> V {
-
-    private val memo: MutableMap<U, V> = ConcurrentHashMap()
-
-    override operator fun invoke(u: U): V = memo.getOrPut(u) { f(u) }
-
-}
 
 fun <X, Y> ((X) -> Y).memoizeWrong(): (X) -> Y {
 

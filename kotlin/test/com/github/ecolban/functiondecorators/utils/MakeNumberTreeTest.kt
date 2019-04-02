@@ -3,7 +3,7 @@ package com.github.ecolban.functiondecorators.utils
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-internal class MakeNumberTreeKtTest {
+internal class MakeNumberTreeTest {
 
     @Test
     fun testParseTree() {
