@@ -109,7 +109,7 @@ resulting in a function, let's call it `h`, and _replacing_ `max_path` with `h`,
 such that wherever `max_path` is called, it's `h` that gets called. This turns 
 `solution_simple` into `solution_memoized`. 
  
-In [max_path](https://github.com/ecolban/FunctionDecorators/blob/master/python/max_path.py)
+In [max_path](python/max_path.py)
 we show another example of a decorator: `timeit`. There are many other use cases 
 for decorators.
 
@@ -124,7 +124,7 @@ _replacing_ the function that the decorator is applied to with the resulting
 decorated function, that is the tricky part.
 
 A first example of a decorator is shown in 
-[TimeIt.kt](https://github.com/ecolban/FunctionDecorators/blob/master/kotlin/src/com/github/ecolban/functiondecorators/TimeIt.kt)
+[TimeIt.kt](kotlin/src/com/github/ecolban/functiondecorators/TimeIt.kt)
 
 `timeIt` is defined as an extension function of the function that it decorates. It 
 needs to be overloaded so that it can be applied to functions with different 
@@ -136,12 +136,12 @@ replaces the first. If `f` is recursive, then `f.timeIt()` will call `f` and not
 itself. This is OK for a decorator such as `timeIt`; normally we only want to time
 the top level call, not each recursive call.
 
-In [MemoizeWrong.kt](https://github.com/ecolban/FunctionDecorators/blob/master/kotlin/src/com/github/ecolban/functiondecorators/MemoizeWrong.kt),
+In [MemoizeWrong.kt](kotlin/src/com/github/ecolban/functiondecorators/MemoizeWrong.kt),
 we have the Kotlin equivalent of `memoize` in the Python code. However, decorating
 a function with this function, does not have the same effect as decorating a 
 function with `memoize` in Python. This is illustrated by `solutionMemoizedWrong`
 in 
-[MaxPath.kt](https://github.com/ecolban/FunctionDecorators/blob/master/kotlin/src/com/github/ecolban/functiondecorators/MaxPath.kt),
+[MaxPath.kt](kotlin/src/com/github/ecolban/functiondecorators/MaxPath.kt),
 If `memoizeWrong()` is applied to a recursive function `maxPath`, then 
 `maxPath.memoizeWrong()` will call `maxPath` and not `maxPath.memoizeWrong()`. As
  a result, only the top level call to `f.memoiseWrong()` is entered into the
@@ -178,12 +178,12 @@ wrapper:
     }
 
 ```  
-In order to inject the "correct function", the `memoize` function must call 
+To inject the "correct function", the `memoize` function must call 
 `wrapper` with the "correct function". The "correct function" is the function that
 `wrapper` returns when called with the "correct function". In other words, if `g`
 is the "correct function", then `g = wrapper(g)`. In addition, `memoize` must 
 apply memoization. See 
-[Combinators.kt](https://github.com/ecolban/FunctionDecorators/blob/master/kotlin/src/com/github/ecolban/functiondecorators/Combinators.kt)
+[Combinators.kt](kotlin/src/com/github/ecolban/functiondecorators/Combinators.kt)
 for an implementation of `memoize`. Note that if we remove the memoization code
 from `memoize`, we get a simple Y combinator, so `memoize` is a Y combinator that
 memoizes. 
