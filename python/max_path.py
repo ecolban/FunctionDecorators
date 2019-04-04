@@ -35,36 +35,37 @@ def memoize(f):
 
     return h
 
+@timeit
+def solution_simple(tree):
 
-# @memoize
-def max_path(row, col):
-    if row == len(tree) - 1:
-        return tree[row][col]
-    else:
-        return tree[row][col] + \
-               max(max_path(row + 1, col), max_path(row + 1, col + 1))
+    @memoize
+    def max_path(row, col):
+        if row == len(tree) - 1:
+            return tree[row][col]
+        else:
+            return tree[row][col] + \
+                   max(max_path(row + 1, col), max_path(row + 1, col + 1))
 
-
-def max_path_memoized(row, col):
-    memo = {}
-
-    def h(r, c):
-        if (r, c) not in memo:
-            if r == len(tree) - 1:
-                res = tree[r][c]
-            else:
-                res = tree[r][c] + \
-                      max(h(r + 1, c), h(r + 1, c + 1))
-            memo[(r, c)] = res
-        return memo[(r, c)]
-
-    return h(row, col)
+    return max_path(0, 0)
 
 
 @timeit
-def test_max_path():
-    return max_path_memoized(0, 0)
+def solution_memoized(tree):
+
+    memo = {}
+
+    def max_path(row, col):
+        if (row, col) not in memo:
+            if row == len(tree) - 1:
+                res = tree[row][col]
+            else:
+                res = tree[row][col] + \
+                      max(max_path(row + 1, col), max_path(row + 1, col + 1))
+            memo[(row, col)] = res
+        return memo[(row, col)]
+
+    return max_path(0, 0)
 
 
 if __name__ == "__main__":
-    print(test_max_path())
+    print(solution_simple(tree))

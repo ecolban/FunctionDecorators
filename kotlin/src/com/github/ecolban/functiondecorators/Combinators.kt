@@ -41,7 +41,8 @@ fun <X1, X2, Y> ((F2<X1, X2, Y>) -> F2<X1, X2, Y>).memoize(): F2<X1, X2, Y> {
 
         val memo: MutableMap<Pair<X1, X2>, Y> = ConcurrentHashMap()
 
-        override fun invoke(x1: X1, x2: X2): Y = memo.getOrPut(Pair(x1, x2)) { this@memoize(this)(x1, x2) }
+        override fun invoke(x1: X1, x2: X2): Y = memo.getOrPut(Pair(x1, x2)) {
+            this@memoize(this)(x1, x2) }
     }
 }
 
