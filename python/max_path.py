@@ -1,5 +1,4 @@
 import time
-from functools import lru_cache
 
 
 def parse_tree(file_name):
@@ -34,6 +33,7 @@ def memoize(f):
         return memo[args]
 
     return h
+
 
 @timeit
 def solution_simple(tree):

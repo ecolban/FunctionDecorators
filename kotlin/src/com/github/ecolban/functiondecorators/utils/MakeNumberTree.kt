@@ -1,7 +1,9 @@
 package com.github.ecolban.functiondecorators.utils
 
 import java.io.File
+import java.nio.file.Paths
 import java.util.concurrent.ThreadLocalRandom
+
 
 private const val SEPARATOR = " "
 
@@ -22,16 +24,17 @@ private fun printSequence(pathName: String, seq: Sequence<String>) {
 }
 
 fun main() {
-    val depth = 2000
+    val depth = 1000 // /Users/erikc/IdeaProjects/FunctionDecorators/kotlin/res
     printSequence("res/Tree_$depth.txt", generateTree(depth))
 }
 
-fun parseTree(treeFile: String): Array<IntArray> = File("res/$treeFile").useLines { seq ->
-    seq.map { line ->
-        line.split(SEPARATOR)
-            .map { it.toInt() }
-            .toIntArray()
-    }.toList().toTypedArray()
+fun parseTree(treeFile: String): Array<IntArray> {
+    val uri = Thread.currentThread().contextClassLoader.getResource(treeFile).toURI()
+    return Paths.get(uri).toFile().useLines { seq ->
+        seq.map { line ->
+            line.split(SEPARATOR)
+                    .map { it.toInt() }
+                    .toIntArray()
+        }.toList().toTypedArray()
+    }
 }
-
-
